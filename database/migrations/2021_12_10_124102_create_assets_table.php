@@ -15,6 +15,10 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->uuid('asset_code')->unique();
+            $table->string('asset_type');
+            $table->string('asset_image');
+            $table->boolean('IsActive');
             $table->timestamps();
         });
     }
