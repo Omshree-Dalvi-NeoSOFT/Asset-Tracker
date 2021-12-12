@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="css/style1.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" href="images/weblogo.png" />
   </head>
   <body>
     <div class="container-scroller">
