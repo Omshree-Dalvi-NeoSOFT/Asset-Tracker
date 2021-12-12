@@ -23,7 +23,7 @@ class AdminUser extends Controller
                 if(Hash::check($req->password,$user->password)){
                     //Session(['uname'=> $user->uname]);
                     $req->session()->put('user',$user);
-                    return "success";
+                    return redirect('dashboard');
                 }
                 else{
                     return back()->with('error', 'Login error');
@@ -31,5 +31,10 @@ class AdminUser extends Controller
 
             }
         }
+    }
+
+    public function dashBoard(){
+        $user = session('user');
+        return view('dashboard',compact('user'));
     }
 }
