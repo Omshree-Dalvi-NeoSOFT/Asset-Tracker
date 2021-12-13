@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetsTable extends Migration
+class CreateAssetImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAssetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assets', function (Blueprint $table) {
+        Schema::create('asset_images', function (Blueprint $table) {
             $table->id();
-            $table->uuid('asset_code')->unique();
-            $table->string('asset_type');
-            $table->boolean('IsActive');
+            $table->string('imagepath');
+            $table->bigInteger('aid')->unsigned()->index()->nullable();
+            $table->foreign('aid')->references('id')->on('assets')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAssetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assets');
+        Schema::dropIfExists('asset_images');
     }
 }

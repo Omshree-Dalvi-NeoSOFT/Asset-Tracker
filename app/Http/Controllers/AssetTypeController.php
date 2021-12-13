@@ -33,6 +33,11 @@ class AssetTypeController extends Controller
                 return back()->with('error',"Asset Type Not Added !");
             }
         }
-        //return view('addasset',compact('user'));
+    }
+
+    public function assetType(){
+        $user = session('user');
+        $assets=AssetType::paginate(5);
+        return view('assetstype',['assets'=>$assets,'user'=>$user]);
     }
 }

@@ -11,11 +11,11 @@
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
-     @include('includes.nav')
+      @include('includes.nav')
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
-       @include('includes.sidebar')
+        @include('includes.sidebar')
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -25,8 +25,8 @@
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                  <i class="mdi mdi-home"></i>
-                </span> Dashboard
+                  <i class="mdi mdi-chart-bar"></i>
+                </span> Assets Type
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -37,32 +37,45 @@
               </nav>
             </div>
 
-            <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
+            <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <div class="clearfix">
-                      <h4 class="card-title float-left">Asset Type</h4>
-                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                    <h4 class="card-title">Assets Table</h4>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Asset Type</th>
+                            <th>Asset Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      @foreach ($assets as $asset)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$asset['asset_type']}}</td>
+                                <td>{{$asset['asset_description']}}</td>
+                            </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Asset</h4>
-                    <canvas id="traffic-chart"></canvas>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+          <table>  
+          <div>
+              {{$assets->links()}}
           </div>
+          <style>
+              .w-5{
+                  display: none;
+              }
+          </style>
+
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-          @include('includes.footer')
+         @include('includes.footer')
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

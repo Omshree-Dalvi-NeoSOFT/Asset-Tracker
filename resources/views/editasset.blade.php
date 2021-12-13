@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Asset Tracker</title>
-    <!-- plugins:css -->
     @include('includes.head')
   </head>
   <body>
@@ -15,7 +14,7 @@
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
-        @include('includes.sidebar')
+         @include('includes.sidebar')
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -26,7 +25,7 @@
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
                   <i class="mdi mdi-plus"></i>
-                </span> Add Asset Type
+                </span> Add Asset 
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -38,35 +37,41 @@
             </div>
 
             <div class="row">
-            @if(Session::has('success'))
-                <div class="alert alert-success"> {{Session::get('success')}} </div>
-            @endif
-            @if(Session::has('error'))
-                <div class="alert alert-danger"> {{Session::get('error')}} </div>
-            @endif
+              
+
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Asset Type</h4>
-                    <p class="card-description"> Add Asset Type </p>
-                    <form class="forms-sample" action="{{route('postAddAssetType')}}" method="post">
+                    <h4 class="card-title">Asset</h4>
+                    <p class="card-description"> Add Asset </p>
+                    <form class="forms-sample" action="{{route('postEditAsset')}}" method="post" enctype="multipart/form-data">
                         @csrf()
+                        <input type="hidden" name="assetid" value="{{$asset['id']}}"/>
+                        <input type="hidden" name="assetcode" value="{{$asset['asset_code']}}"/>
                       <div class="form-group">
-                        <label for="exampleInputName1">Asset Type</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Asset Type" name="assettype">
+                        <label for="exampleInputName1">Asset Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Asset Name" name="assetname" value="{{$asset['asset_name']}}">
                       </div>
-                      @if($errors->has('assettype'))
-                            <label class="alert alert-danger">{{$errors->first('assettype')}}</label>
-                        @endif
-
                       <div class="form-group">
-                        <label for="exampleTextarea1">Asset Description</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="assettypedescription"></textarea>
+                        <label for="exampleSelectAssetType">Asset Type</label>
+                        <select class="form-control" id="exampleSelectAssetType" name="assettype">
+                            <!-- foreach render types  -->
+                            <option value="{{$selectedtype['id']}}" selected>{{$selectedtype['asset_type']}} </option>
+                          @foreach ($types as $type)
+                            <option value="{{$type['id']}}">{{$type['asset_type']}}</option>
+                          @endforeach
+                          
+                        </select>
                       </div>
-                      @if($errors->has('assettypedescription'))
-                            <label class="alert alert-danger">{{$errors->first('assettypedescription')}}</label>
-                        @endif
-
+                      <div class="form-group">
+                        <label for="exampleSelectGender">Is Active</label>
+                        <select class="form-control" id="exampleSelectGender" name="isactive">
+                            <!-- foreach render types  -->
+                          <option value="1" selected>Active</option>
+                          <option value="0">In Active</option>
+                        </select>
+                      </div>
+                      
                       <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
                       <button class="btn btn-light">Cancel</button>
                     </form>
@@ -80,7 +85,7 @@
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-          @include('includes.footer')
+            @include('includes.footer')
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
@@ -88,7 +93,7 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    @include('includes.foot')
+        @include('includes.foot')
     <!-- End custom js for this page -->
   </body>
 </html>
