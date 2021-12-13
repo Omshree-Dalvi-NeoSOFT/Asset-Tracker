@@ -47,6 +47,7 @@
                             <th>Sr No</th>
                             <th>Asset Type</th>
                             <th>Asset Description</th>
+                            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -55,6 +56,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$asset['asset_type']}}</td>
                                 <td>{{$asset['asset_description']}}</td>
+                                 <td><a href="editassettype/{{ $asset['id'] }}" class="btn btn-info" role="button">Edit</a> | <a href="javascript:void(0)" class="btn btn-danger dtlpro" aid="{{ $asset['id'] }}" role="button">Delete</a></td>
                             </tr>
                         @endforeach
                       </tbody>
@@ -72,7 +74,32 @@
                   display: none;
               }
           </style>
-
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $(".dtlpro").click(function(e){
+                        var aid = $(this).attr("aid");
+                        if(confirm(" Your Asset will be deleted !!")){
+                            //alert(aid);
+                            $.ajax({
+                                url:"{{url('/deleteassettype')}}",
+                                type:'post',
+                                method:'patch',
+                                data:{_token:'{{csrf_token()}}',aid:aid},
+                                success:function(response){
+                                  window.location.reload();
+                              },
+                              error: function(jqXHR, status, err){
+                                  window.location.reload();
+                              }
+                            })
+                        }
+                        else{
+                            alert(" Action Cancelled !")
+                        }
+                    })
+                })
+            </script>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
          @include('includes.footer')

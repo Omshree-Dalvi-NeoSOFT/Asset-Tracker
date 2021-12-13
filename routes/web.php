@@ -19,8 +19,11 @@ Route::get('/addasset',[AssetController::class,'addAsset'])->name('addAsset');
 Route::get('/asset',[AssetController::class,'assets'])->name('Assets');
 Route::get('/assettype',[AssetTypeController::class,'assetType'])->name('AssetsType');
 Route::get('/editasset/{id}',[AssetController::class,'editAsset'])->name('EditAsset');
+Route::get('/editassettype/{id}',[AssetTypeController::class,'editAssetType'])->name('EditAssetType');
 
 Route::post('/postaddassettype',[AssetTypeController::class,'postAddAssetType'])->name('postAddAssetType');
 Route::post('/postaddasset',[AssetController::class,'postAddAsset'])->name('postAddAsset');
 Route::post('/posteditasset',[AssetController::class,'postEditAsset'])->name('postEditAsset');
 Route::patch('/deleteasset',[AssetController::class,'deleteAssets'])->name('DeleteAssets');
+Route::patch('/deleteassettype',[AssetTypeController::class,'deleteAssetsType'])->name('DeleteAssetsType');
+Route::post('/posteditassettype',[AssetTypeController::class,'postEditAssetType'])->name('postEditAssetType');
