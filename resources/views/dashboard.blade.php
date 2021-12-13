@@ -42,17 +42,18 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="clearfix">
-                      <h4 class="card-title float-left">Asset Type</h4>
+                      <h4 class="card-title float-left">Asset </h4>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                    
+                    <div id="piechart" style="width: 100%; height: 100%;"></div>
                   </div>
                 </div>
               </div>
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Asset</h4>
+                    <h4 class="card-title">Asset Type</h4>
                     <canvas id="traffic-chart"></canvas>
                     <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                   </div>
@@ -60,6 +61,27 @@
               </div>
             </div>
           </div>
+          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+          <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+              var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+              <?php echo $chartData ?>
+              ]);
+
+              var options = {
+                title: 'Asset Types'
+              };
+
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+              chart.draw(data, options);
+            }
+          </script>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           @include('includes.footer')

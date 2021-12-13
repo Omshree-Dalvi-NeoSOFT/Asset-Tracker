@@ -38,6 +38,8 @@ class AssetController extends Controller
             $asset->asset_name=$req->assetname;
             $asset->asset_code=$assetcode;
             $asset->asset_type=$req->assettype;
+            $assettypename=AssetType::where('id',$req->assettype)->first();
+            $asset->asset_type_name = $assettypename['asset_type'];
             $asset->IsActive=$req->isactive;
             $asset->save();
             if($files=$req->file('img')){

@@ -17,6 +17,7 @@ class CreateAssetsTable extends Migration
             $table->id();
             $table->uuid('asset_code')->unique();
             $table->string('asset_type');
+            $table->string('asset_type_name');
             $table->boolean('IsActive');
             $table->timestamps();
         });

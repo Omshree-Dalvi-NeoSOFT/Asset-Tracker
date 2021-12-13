@@ -13,6 +13,7 @@ Route::get('/', function () {
 Route::post('/postlogin',[AdminUser::class,'Postlogin'])->name('PostLogin');
 
 Route::get('/dashboard',[AdminUser::class,'dashBoard'])->name('Dashboard');
+//Route::get('/dashboard',[AdminUser::class,'chart'])->name('Dashboard');
 Route::get('/manageasset',[AssetController::class,'assetManage'])->name('AssetManage');
 Route::get('/addassettype',[AssetTypeController::class,'addAssetType'])->name('addAssetType');
 Route::get('/addasset',[AssetController::class,'addAsset'])->name('addAsset');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssetType;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUser extends Controller
@@ -35,6 +37,14 @@ class AdminUser extends Controller
 
     public function dashBoard(){
         $user = session('user');
-        return view('dashboard',compact('user'));
+        $result=DB::select(DB::raw("SELECT COUNT(*) as total_asset,asset_type_name FROM assets GROUP BY asset_type_name"));
+        $chartdata="";
+        foreach($result as $list){
+            $chartdata.="['".$list->asset_type_name."',   ".$list->total_asset."],";
+
+        }
+        $arr['chartData']=rtrim($chartdata,",");
+        //return view('admin.chart',$arr);
+        return view('dashboard',compact('user'),$arr);
     }
 }
