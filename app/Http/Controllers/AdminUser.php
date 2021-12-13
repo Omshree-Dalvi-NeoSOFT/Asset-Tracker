@@ -47,4 +47,9 @@ class AdminUser extends Controller
         //return view('admin.chart',$arr);
         return view('dashboard',compact('user'),$arr);
     }
+
+    public function logout(){
+        session()->forget('user');
+        return view('login');
+    }
 }

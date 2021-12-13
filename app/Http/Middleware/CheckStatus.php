@@ -16,6 +16,10 @@ class CheckStatus
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        $user=session('user');
+        if(!empty($user)){
+            return $next($request);
+        }
+        return response()->json(" Please Login !");
     }
 }
