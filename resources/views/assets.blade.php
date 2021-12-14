@@ -48,6 +48,7 @@
                             <th>Asset Code</th>
                             <th>Asset Type</th>
                             <th>Asset Status</th>
+                            <th>Asset Image</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -63,6 +64,7 @@
                                @else 
                                 <h3><span class="badge badge-warning">In Active</span></h3>
                                 @endif </td>
+                                <td></td>
                                 <td><a href="editasset/{{ $asset['id'] }}" class="btn btn-info" role="button">Edit</a>  | <a href="javascript:void(0)" class="btn btn-danger dtlpro" aid="{{ $asset['id'] }}" role="button">Delete</a></td>
                             </tr>
                         @endforeach
@@ -107,26 +109,6 @@
                     })
                 })
             </script>
-            <script>
-              $(function () {
-                $("#example1").DataTable({
-                  "responsive": true, "lengthChange": false, "autoWidth": false,
-                  "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                  "paging": true,
-                  "lengthChange": false,
-                  "searching": false,
-                  "ordering": true,
-                  "info": true,
-                  "autoWidth": false,
-                  "responsive": true,
-                });
-              });
-            </script>
-
-            <script src="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js')}}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
