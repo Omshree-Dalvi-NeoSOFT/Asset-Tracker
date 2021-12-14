@@ -68,11 +68,6 @@ class AssetController extends Controller
     }
 
     public function deleteAssets(Request $req){
-        // $asset=AssetImage::where('aid',$req->aid);
-        // foreach($asset as $file):
-        //     $path=public_path()."assetimages/".$file['imagepath'];
-        //     unlink($path);
-        // endforeach;
         Asset::where('id',$req->aid)->delete();
         return back();
     }
@@ -87,10 +82,10 @@ class AssetController extends Controller
     }
 
     public function postEditAsset(Request $req){
-            $assetcode = $req->assetcode;
-            $assetid=$req->assetid;
+        $assetcode = $req->assetcode;
+        $assetid=$req->assetid;
 
-            Asset::where('id',$assetid)->update(['asset_name'=>$req->assetname,'asset_code'=>$assetcode,'asset_type'=>$req->assettype,'IsActive'=>$req->isactive]);
-            return back()->with('success',"Details Added !");
+        Asset::where('id',$assetid)->update(['asset_name'=>$req->assetname,'asset_code'=>$assetcode,'asset_type'=>$req->assettype,'IsActive'=>$req->isactive]);
+        return back()->with('success',"Details Added !");
     }
 }

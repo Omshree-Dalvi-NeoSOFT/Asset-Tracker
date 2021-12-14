@@ -57,8 +57,12 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$asset['asset_name']}}</td>
                                 <td>{{$asset['asset_code']}}</td>
-                                <td>{{$asset['asset_type']}}</td>
-                                <td>{{$asset['IsActive']}}</td>
+                                <td>{{$asset['asset_type_name']}}</td>
+                                <td> @if($asset['IsActive'] == 1)
+                                  <h3><span class="badge badge-success">Active</span></h3>
+                               @else 
+                                <h3><span class="badge badge-warning">In Active</span></h3>
+                                @endif </td>
                                 <td><a href="editasset/{{ $asset['id'] }}" class="btn btn-info" role="button">Edit</a>  | <a href="javascript:void(0)" class="btn btn-danger dtlpro" aid="{{ $asset['id'] }}" role="button">Delete</a></td>
                             </tr>
                         @endforeach

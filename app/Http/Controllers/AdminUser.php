@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use App\Models\AssetType;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,7 +46,15 @@ class AdminUser extends Controller
         }
         $arr['chartData']=rtrim($chartdata,",");
         //return view('admin.chart',$arr);
-        return view('dashboard',compact('user'),$arr);
+
+        $result1=DB::select(DB::raw("SELECT count(*) as activestatus,IsActive FROM assets  GROUP BY IsActive"));
+        $chartdata1="";
+        foreach($result1 as $list){
+            $chartdata1="['".$list->IsActive."',   ".$list->activestatus."],";
+
+        }
+        $arr1['chartDataa']=rtrim($chartdata1,",");
+        return view('dashboard',compact('user'),$arr,$arr1);
     }
 
     public function logout(){
