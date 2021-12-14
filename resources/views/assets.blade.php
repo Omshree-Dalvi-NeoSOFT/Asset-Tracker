@@ -40,15 +40,14 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Assets Table</h4>
-                    <table class="table table-hover" id="example1">
+                    <table class="table table-hover" id="example1" width="100%">
                       <thead>
                         <tr>
                             <th>Sr No</th>
                             <th>Asset Name</th>
                             <th>Asset Code</th>
                             <th>Asset Type</th>
-                            <th>Asset Status</th>
-                            <th>Asset Image</th>
+                            <th class="text-center">Asset Status</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -64,7 +63,6 @@
                                @else 
                                 <h3><span class="badge badge-warning">In Active</span></h3>
                                 @endif </td>
-                                <td></td>
                                 <td><a href="editasset/{{ $asset['id'] }}" class="btn btn-info" role="button">Edit</a>  | <a href="javascript:void(0)" class="btn btn-danger dtlpro" aid="{{ $asset['id'] }}" role="button">Delete</a></td>
                             </tr>
                         @endforeach
@@ -108,6 +106,12 @@
                         }
                     })
                 })
+                $(function () {
+                  $("#example1").DataTable({
+                    "responsive": true, "lengthChange": true, "autoWidth": true,
+                    "buttons": ["copy", "csv", "excel", "pdf"]
+                  }).buttons().container().appendTo('#example1_wrapper');
+                });
             </script>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
@@ -125,6 +129,18 @@
     </div>
     <!-- container-scroller -->
     @include('includes.foot')
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <!-- End custom js for this page -->
   </body>
 </html>
