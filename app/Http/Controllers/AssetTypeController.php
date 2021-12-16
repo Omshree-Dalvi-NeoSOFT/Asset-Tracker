@@ -42,11 +42,6 @@ class AssetTypeController extends Controller
     }
 
     public function deleteAssetsType(Request $req){
-        // $asset=AssetImage::where('aid',$req->aid);
-        // foreach($asset as $file):
-        //     $path=public_path()."assetimages/".$file['imagepath'];
-        //     unlink($path);
-        // endforeach;
         AssetType::where('id',$req->aid)->delete();
         return back();
     } 
