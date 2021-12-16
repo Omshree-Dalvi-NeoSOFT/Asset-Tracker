@@ -9,7 +9,7 @@ class Asset extends Model
 {
     use HasFactory;
     protected $table="assets";
-    function get(){
+    function images(){
         return $this->hasMany(AssetImage::class);
     }
 }

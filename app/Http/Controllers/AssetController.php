@@ -48,12 +48,12 @@ class AssetController extends Controller
                     $ass = new AssetImage();
                     $filename=$file->getClientOriginalName();
                     $ass->imagepath=$filename;
-                    $ass->aid=$asstype->id;
-                    $path=public_path('\assetimages');
-                    $filename=$file->getClientOriginalName();
-                    if($file->move($path,$filename)){
-                        $asstype->get()->save($ass);
-                    }
+                    //$ass->aid=$asstype->id;
+                    $dest=public_path("/assetimages");
+                    if($file->move($dest,$filename))
+                        {
+                            $asstype->images()->save($ass);
+                        }
                 endforeach;
                 
             }
@@ -65,6 +65,14 @@ class AssetController extends Controller
         $user = session('user');
         $assets=Asset::paginate(5);
         return view('assets',['assets'=>$assets,'user'=>$user]);
+    }
+
+    public function assetsImage($id){
+        $user = session('user');
+        //$img=Asset::find($id)->image();
+        $images=AssetImage::all()->where('asset_id',$id);
+        //return $images;
+        return view('assetimages',['images'=>$images,'user'=>$user]);
     }
 
     public function deleteAssets(Request $req){

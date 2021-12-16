@@ -21,6 +21,7 @@ Route::middleware([CheckStatus::class])->group(function(){
     Route::get('/addassettype',[AssetTypeController::class,'addAssetType'])->name('addAssetType');
     Route::get('/addasset',[AssetController::class,'addAsset'])->name('addAsset');
     Route::get('/asset',[AssetController::class,'assets'])->name('Assets');
+    Route::get('/assetimage/{id}',[AssetController::class,'assetsImage'])->name('AssetsImage');
     Route::get('/assettype',[AssetTypeController::class,'assetType'])->name('AssetsType');
     Route::get('/editasset/{id}',[AssetController::class,'editAsset'])->name('EditAsset');
     Route::get('/editassettype/{id}',[AssetTypeController::class,'editAssetType'])->name('EditAssetType');

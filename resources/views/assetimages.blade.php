@@ -25,7 +25,7 @@
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
                   <i class="mdi mdi-table-large"></i>
-                </span> Assets
+                </span> Asset Image(s)
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -39,31 +39,20 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Assets Table</h4>
+                    <h4 class="card-title">Assets Table</h4> 
+                    <a href="{{route('Assets')}}" class="btn btn-dark btn-sm" role="button">Back</a>
                     <table class="table table-hover" id="example1" width="100%">
                       <thead>
                         <tr>
                             <th>Sr No</th>
-                            <th>Asset Name</th>
-                            <th>Asset Code</th>
-                            <th>Asset Type</th>
-                            <th class="text-center">Asset Status</th>
-                            <th>Action</th>
+                            <th>Asset Image</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach ($assets as $asset)
+                      @foreach ($images as $img)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$asset['asset_name']}}</td>
-                                <td>{{$asset['asset_code']}}</td>
-                                <td>{{$asset['asset_type_name']}}</td>
-                                <td> @if($asset['IsActive'] == 1)
-                                  <h3><span class="badge badge-success">Active</span></h3>
-                               @else 
-                                <h3><span class="badge badge-warning">In Active</span></h3>
-                                @endif </td>
-                                <td><a href="assetimage/{{ $asset['id'] }}" class="btn btn-dark btn-sm" role="button">view</a> | <a href="editasset/{{ $asset['id'] }}" class="btn btn-info btn-sm" role="button">Edit</a>  | <a href="javascript:void(0)" class="btn btn-danger btn-sm dtlpro" aid="{{ $asset['id'] }}" role="button">Delete</a></td>
+                                <td><img src="{{asset('assetimages/'.$img['imagepath'])}}" alt="Asset Image" width="300px" height="300px"></td>
                             </tr>
                         @endforeach
                       </tbody>
@@ -73,42 +62,12 @@
               </div>
 
           <table>  
-          <div>
-              {{$assets->links()}}
-          </div>
-          <style>
-              .w-5{
-                  display: none;
-              }
-          </style>
+
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
-                $(document).ready(function(){
-                    $(".dtlpro").click(function(e){
-                        var aid = $(this).attr("aid");
-                        if(confirm(" Your Asset will be deleted !!")){
-                            //alert(aid);
-                            $.ajax({
-                                url:"{{url('/deleteasset')}}",
-                                type:'post',
-                                method:'patch',
-                                data:{_token:'{{csrf_token()}}',aid:aid},
-                                success:function(response){
-                                  window.location.reload();
-                              },
-                              error: function(jqXHR, status, err){
-                                  window.location.reload();
-                              }
-                            })
-                        }
-                        else{
-                            alert(" Action Cancelled !")
-                        }
-                    })
-                })
                 $(function () {
                   $("#example1").DataTable({
-                    "responsive": true, "lengthChange": true, "autoWidth": true,
+                    "responsive": true, "lengthChange": false, "autoWidth": true,
                     "buttons": ["copy", "csv", "excel", "pdf"]
                   }).buttons().container().appendTo('#example1_wrapper');
                 });
