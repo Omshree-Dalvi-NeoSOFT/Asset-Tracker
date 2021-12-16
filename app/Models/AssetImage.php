@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AssetImage extends Model
 {
     use HasFactory;
+    protected $tabe="asset_images";
+    public function asset(){
+        return $this->belongsTo(Asset::class);
+    }
 }

@@ -52,7 +52,7 @@ class AssetController extends Controller
                     $path=public_path('\assetimages');
                     $filename=$file->getClientOriginalName();
                     if($file->move($path,$filename)){
-                        $ass->save();
+                        $asstype->get()->save($ass);
                     }
                 endforeach;
                 

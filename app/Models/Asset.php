@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Asset extends Model
 {
     use HasFactory;
-    
+    protected $table="assets";
     function get(){
-        return $this->hasMany('App\Model\AssetImage');
+        return $this->hasMany(AssetImage::class);
     }
 }
