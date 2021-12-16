@@ -16,7 +16,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Asset Tracker</title>
+    <title>Asset Tracker</title> 
   </head>
   <body>
   
@@ -45,7 +45,7 @@
                 @csrf()
               <div class="form-group first">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username">
+                <input type="text" class="form-control" id="username" name="username" onchange="cook()">
               </div>
                 @if($errors->has('username'))
                     <label class="text-danger">{{$errors->first('username')}}</label>
@@ -62,7 +62,7 @@
               
               <div class="d-flex mb-5 align-items-center">
                 <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                  <input type="checkbox" checked="checked"/>
+                  <input type="checkbox" name="rememberme"/>
                   <div class="control__indicator"></div>
                 </label>
               </div>
@@ -91,7 +91,18 @@
       </div>
     </div>
   </div>
-
+  <script>
+      function cook(){
+        if("@php echo $_COOKIE['username'];@endphp"!=undefined){
+          if("@php echo $_COOKIE['username'];@endphp" == document.getElementById("username").value){
+            document.getElementById("password").value = "@php echo $_COOKIE['password'];@endphp";
+          }
+          else{
+            document.getElementById("password").value = "";
+          }
+        }
+      }
+    </script>
   
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>

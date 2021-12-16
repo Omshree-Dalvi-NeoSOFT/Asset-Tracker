@@ -26,6 +26,10 @@ class AdminUser extends Controller
                 if(Hash::check($req->password,$user->password)){
                     //Session(['uname'=> $user->uname]);
                     $req->session()->put('user',$user);
+                    if(!empty($req->rememberme)){
+                        setcookie("username",$req->username,time()+3600*24);
+                        setcookie("password",$req->password,time()+3600*24);
+                      }
                     return redirect('dashboard');
                 }
                 else{
