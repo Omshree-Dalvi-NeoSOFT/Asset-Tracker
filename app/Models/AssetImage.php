@@ -9,7 +9,9 @@ class AssetImage extends Model
 {
     use HasFactory;
     protected $table="asset_images";
+    protected $fillable=['aid'];
     public function asset(){
         return $this->belongsTo(Asset::class);
     }
+
 }

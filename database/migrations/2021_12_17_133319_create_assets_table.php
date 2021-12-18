@@ -17,7 +17,8 @@ class CreateAssetsTable extends Migration
             $table->id();
             $table->string('asset_name');
             $table->uuid('asset_code')->unique();
-            $table->string('asset_type');
+            $table->unsignedBigInteger('asset_type')->index()->nullable();
+            $table->foreign('asset_type')->references('id')->on('asset_types')->onDelete('cascade')->onUpdate('cascade');
             $table->string('asset_type_name');
             $table->boolean('IsActive');
             $table->timestamps();

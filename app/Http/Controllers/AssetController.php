@@ -69,7 +69,7 @@ class AssetController extends Controller
 
     public function assetsImage($id){
         $user = session('user');
-        //$img=Asset::find($id)->image();
+        //$images=Asset::find($id)->image();
         $images=AssetImage::all()->where('asset_id',$id);
         //return $images;
         return view('assetimages',['images'=>$images,'user'=>$user]);
